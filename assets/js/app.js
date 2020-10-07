@@ -95,19 +95,19 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
       .attr("class", "aText")
       .text("In Poverty (%)");
 
-    // Initialize tool tip
+    // Initialize tool tip -- umm no clue how to even use this so i will just...
     var toolTip = d3.tip()
       .attr("class", "d3-tip")
       .offset([80, -60])
       .html(function(d) {
-        return (`${d.abbr}<br>Poverty: ${d.poverty}%<br>Lacks Healthcare: ${d.healthcare}`);
+        return (`${d.state}<br>Poverty: ${d.poverty}%<br>Lacks Healthcare: ${d.healthcare}%`);
       });
 
   // Create tooltip in the chart
   chartGroup.call(toolTip);
 
   // Create event listeners to display and hide the tooltip
-  circlesGroup.on("click", function(d) {
+  circlesGroup.on("mouseover", function(d) {
     toolTip.show(d, this);
   })
     // onmouseout event
