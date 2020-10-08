@@ -1,6 +1,5 @@
 // Set up the chart 
-// var svgWidth = 960;
-var svgWidth = 800;
+var svgWidth = 960;
 var svgHeight = 500;
 
 var margin = {
@@ -19,8 +18,79 @@ var svg = d3.select("#scatter")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
 
-var chartGroup = svg.append("g")
+// Append SVG group
+  var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+// ADD BONUS CODE HERE //
+// Initial paramater
+var selectXAxis = "poverty";
+
+// Function for updating data points (x-scale) upon click on axis label
+function xScale(healthData, selectXAxis) {
+  // Create scales
+  var xLinearScale = d3.scaleLinear()
+    .domain([d3.min(hairData, d => d[selectXAxis]) * 0.8,
+      d3.max(healthData, d => d[selectXAxis]) * 1.2
+    ])
+    .range([0, width]);
+
+  return xLinearScale;
+
+// Function for updating x-scale upon click on axis label
+function renderAxes(newXScale, xAxis) {
+  var bottomAxis = d3.axisBottom(newXScale);
+
+  xAxis.transition()
+    .duration(1000)
+    .call(bottomAxis);
+
+  return xAxis;
+}
+
+// function used for updating circles group with a transition to new circles
+function renderCircles(circlesGroup, newXScale, selectXAxis) {
+
+  circlesGroup.transition()
+    .duration(1000)
+    .attr("cx", d => newXScale(d[selectXAxis]));
+
+  return circlesGroup;
+}
+
+// function used for updating circles group with new tooltip
+function updateToolTip(chosenXAxis, circlesGroup) {
+
+  var label;
+
+  if (chosenXAxis === "hair_length") {
+    label = "Hair Length:";
+  }
+  else {
+    label = "# of Albums:";
+  }
+
+  var toolTip = d3.tip()
+    .attr("class", "tooltip")
+    .offset([80, -60])
+    .html(function(d) {
+      return (`${d.rockband}<br>${label} ${d[chosenXAxis]}`);
+    });
+
+  circlesGroup.call(toolTip);
+
+  circlesGroup.on("mouseover", function(data) {
+    toolTip.show(data);
+  })
+    // onmouseout event
+    .on("mouseout", function(data, index) {
+      toolTip.hide(data);
+    });
+
+  return circlesGroup;
+}
+
+// ADD BONUS CODE ENDED HERE //
 
 // Import data from data.csv
 d3.csv("assets/data/data.csv").then(function(healthData) {
@@ -62,23 +132,16 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
       .attr("cx", d => xPovertyScale(d.poverty))
       .attr("cy", d => yLackHealthScale(d.healthcare))
       .attr("r", "10")
-      .classed("stateText stateCircle", true)
-      .attr("opacity", "0.5");
+      .classed("stateText stateCircle", true);
   
 // TEXT ADDED CODE STARTED //
-    // Add SVG text element
-    var circleText = svg.selectAll("text")
-      .data(healthData)
-      .enter()
-      .append("text");
-
     // Add SVG text element attributes
-    var textLabels = circleText
-      .attr("x", function(d) { return d.cx; })
-      .attr("y", function(d) { return d.cy; })
+    chartGroup.selectAll("text")
+      .append("text")
+      .attr("x", d => d.poverty)
+      .attr("y", d => d.healthcare)
       .text(d => d.abbr)
       .classed("stateText", true);
-
 // TEXT ADDED CODE ENDED //
 
     // Create axes labels
