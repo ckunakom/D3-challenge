@@ -228,36 +228,73 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
         circlesGroup = updateToolTip(selectXAxis, circlesGroup);
 
         // changes classes to change bold text
-        if (selectXAxis === "age") {
-          ageLabel
-            .classed("active", true)
-            .classed("inactive inactive:hover", false);
-          povertyLabel
-            .classed("active", false)
-            .classed("inactive inactive:hover", true);
+        // if (selectXAxis === "age") {
+        //   ageLabel
+        //     .classed("active", true)
+        //     .classed("inactive inactive:hover", false);
+        //   povertyLabel
+        //     .classed("active", false)
+        //     .classed("inactive inactive:hover", true);
+        // }
+        // else if (selectXAxis === "income") {
+        //   incomeLabel
+        //     .classed("active", true)
+        //     .classed("inactive inactive:hover", false);
+        //   ageLabel
+        //     .classed("active", false)
+        //     .classed("inactive inactive:hover", true);
+        //   povertyLabel
+        //     .classed("active", false)
+        //     .classed("inactive inactive:hover", true);
+        // }
+        // else {
+        //   incomeLabel
+        //     .classed("active", false)
+        //     .classed("inactive inactive:hover", true);
+        //   ageLabel
+        //     .classed("active", false)
+        //     .classed("inactive inactive:hover", true);
+        //   povertyLabel
+        //     .classed("active", true)
+        //     .classed("inactive  inactive:hover", false);
+        // }
+        switch(selectXAxis) {
+          case "age":
+            ageLabel
+              .classed("active", true)
+              .classed("inactive inactive:hover", false);
+            povertyLabel
+              .classed("active", false)
+              .classed("inactive inactive:hover", true);
+            break;
+            
+          case "income":
+            incomeLabel
+              .classed("active", true)
+              .classed("inactive inactive:hover", false);
+            ageLabel
+              .classed("active", false)
+              .classed("inactive inactive:hover", true);
+            povertyLabel
+              .classed("active", false)
+              .classed("inactive inactive:hover", true);
+          break;
+
+          default:
+            incomeLabel
+              .classed("active", false)
+              .classed("inactive inactive:hover", true);
+            ageLabel
+              .classed("active", false)
+              .classed("inactive inactive:hover", true);
+            povertyLabel
+              .classed("active", true)
+              .classed("inactive  inactive:hover", false);
+            break;
         }
-        else if (selectXAxis === "income") {
-          incomeLabel
-            .classed("active", true)
-            .classed("inactive inactive:hover", false);
-          ageLabel
-            .classed("active", false)
-            .classed("inactive inactive:hover", true);
-          povertyLabel
-            .classed("active", false)
-            .classed("inactive inactive:hover", true);
-        }
-        else {
-          incomeLabel
-            .classed("active", false)
-            .classed("inactive inactive:hover", true);
-          ageLabel
-            .classed("active", false)
-            .classed("inactive inactive:hover", true);
-          povertyLabel
-            .classed("active", true)
-            .classed("inactive  inactive:hover", false);
-        }
+
+
+
       }
     });
 
