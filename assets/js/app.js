@@ -144,15 +144,18 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
       .append("circle")
       .attr("cx", d => xLinearScale(d[selectXAxis]))
       .attr("cy", d => yLackHealthScale(d.healthcare))
-      .attr("r", "10")
-      .classed("stateText stateCircle", true);
+      .attr("r", 10)
+      .classed("stateCircle", true);
   
 // TEXT ADDED CODE STARTED //
     // Add SVG text element attributes
     chartGroup.selectAll("text")
+      .data(healthData)
+      .enter()
       .append("text")
-      .attr("x", d => d.poverty)
-      .attr("y", d => d.healthcare)
+      .attr("dx", d => xLinearScale(d[selectXAxis]))
+      .attr("dy", d => yLackHealthScale(d.healthcare) + 10 / 2.5)
+      .attr("font-size", 10)
       .text(d => d.abbr)
       .classed("stateText", true);
 // TEXT ADDED CODE ENDED //
