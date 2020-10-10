@@ -135,8 +135,7 @@ function makeResponsive() {
         circlesGroup.call(toolTip);
 
         // put event listener here
-        circlesGroup
-            .on("mouseover", function (data) {
+        circlesGroup.on("mouseover", function (data) {
                 console.log("tip");
                 toolTip.show(data, this);
             })
@@ -170,8 +169,9 @@ function makeResponsive() {
         var yLinearScale = yScale(censusData, chosenYAxis);
 
         // Create initial axis functions
-        var leftAxis = d3.axisLeft(yLinearScale);
         var bottomAxis = d3.axisBottom(xLinearScale);
+        var leftAxis = d3.axisLeft(yLinearScale);
+
 
         // Append X axis
         var xAxis = chartGroup.append("g")
@@ -281,9 +281,6 @@ function makeResponsive() {
                     xAxis = renderXAxes(xLinearScale, xAxis);
 
                     // Update the circles with new xaxis values
-                    // circlesGroup = xRenderCircles(circlesGroup, xLinearScale, chosenXAxis);
-                    // circleLabel = xRenderCircleText(circleLabel, xLinearScale, chosenXAxis);
-
                     circlesGroup = plotCircles(circlesGroup, xLinearScale, yLinearScale, chosenXAxis, chosenYAxis);
                     circleLabel = plotCircleText(circleLabel, xLinearScale, yLinearScale, chosenXAxis, chosenYAxis);                
 
