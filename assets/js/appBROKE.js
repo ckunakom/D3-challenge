@@ -51,9 +51,9 @@ function renderXAxes(newXScale, xAxis) {
 
 // ---------------- Y-AXIS ---------------- //
 // Initial paramater
-var selectYAxis = "healthcare";
+var selectYAxis = "healthcareLow";
 
-// Function for updating data points (y-scale) upon click on axis label
+// Function for updating y-scale upon click on axis label
 function yScale(healthData, selectYAxis) {
   // Create scales
   var yLinearScale = d3.scaleLinear()
@@ -132,37 +132,37 @@ function renderCircles(circlesGroup, newXScale, newYScale, selectXAxis, selectYA
 
 function updateToolTip(selectXAxis, selectYAxis, circlesGroup) {
 
-  var xlabel = "";
+  // var xlabel = "";
   
-  switch(selectXAxis) {
-    case "poverty":
-      xlabel = "Poverty: ";
-      break;
+  // switch(selectXAxis) {
+  //   case "poverty":
+  //     xlabel = "Poverty: ";
+  //     break;
 
-    case "age":
-      xlabel = "Age: ";
-      break;
+  //   case "age":
+  //     xlabel = "Age: ";
+  //     break;
 
-    default:
-      xlabel = "Household Income: ";
-      break;
-  }
+  //   default:
+  //     xlabel = "Household Income: ";
+  //     break;
+  // }
 
-  var ylabel = "";
+  // var ylabel = "";
 
-  switch(selectYAxis) {
-    case "obesity":
-      ylabel = "Obese: ";
-      break;
+  // switch(selectYAxis) {
+  //   case "obesity":
+  //     ylabel = "Obese: ";
+  //     break;
 
-    case "smokes":
-      ylabel = "Smoke: ";
-      break;
+  //   case "smokes":
+  //     ylabel = "Smoke: ";
+  //     break;
 
-    default:
-      ylabel = "Lack of Healthcare: ";
-      break;
-  }
+  //   default:
+  //     ylabel = "Lack of Healthcare: ";
+  //     break;
+  // }
 
   var toolTip = d3.tip()
     .attr("class", "d3-tip")
@@ -191,8 +191,13 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
 
     // Format the data
     healthData.forEach(function(d) {
-      d.healthcare = +d.healthcare;
       d.poverty = +d.poverty;
+      d.income = +d.income;
+      d.age = +d.age;
+      // Y-Axis
+      d.healthcare = +d.healthcare;
+      d.obesity = +d.obesity;
+      d.smokes = +d.smokes;
     });
 
     
@@ -206,7 +211,7 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     // Use yLinearScale function
     var yLinearScale = yScale(healthData, selectYAxis);
     // var yLackHealthScale = d3.scaleLinear()
-    //   .domain(d3.extent(healthData, d => d.healthcare))
+    //   .domain(d3.extent(healthData, d => d.healthcareLow))
     //   .range([height, 0]);
 
     // Create inital axis functions
@@ -281,7 +286,7 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     var lackHealthLabel = ylabelsGroup.append("text")
       .attr("y", 0 - margin.left + 60)
       .attr("x", 0 - (height / 2))
-      .attr("value", "healthcare")
+      .attr("value", "healthcareLow")
       .attr("class", "aText active")
       .text("Lack of Healthcare (%)");
 
@@ -401,7 +406,7 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
         // Update x axis with transition using previously defined function
         yAxis = renderYAxes(yLinearScale, yAxis);
 
-        // Update circles with new y values using previously defined function
+        // Update circles with new x values using previously defined function
         circlesGroup = renderYCircles(circlesGroup, yLinearScale, selectYAxis);
 
         // Update tooltips with new info
