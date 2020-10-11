@@ -32,12 +32,11 @@ function makeResponsive() {
     var chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-
-  // ---------------- FUNCTION BARRAGE ---------------- //
   // Initial paramaters
   var selectXAxis = "poverty";
   var selectYAxis = "healthcareLow";
-
+  
+  // ---------------- FUNCTION BARRAGE ---------------- //
   // Function for updating x-scale upon click on axis label
   function xScale(healthData, selectXAxis) {
     
@@ -98,12 +97,12 @@ function makeResponsive() {
     return circlesGroup;
   }
 
-  // Function to update position of circle in the text - Tutor's code
+  // Function to update position of text in the circle - Tutor's code
   function plotCircleText(circleText, newXScale, newYScale, selectXAxis, selectYAxis) {
     circleText.transition()
       .duration(1000)
       .attr("x", d => newXScale(d[selectXAxis]))
-      .attr("y", d => newYScale(d[selectYAxis]));
+      .attr("y", d => newYScale(d[selectYAxis] - 0.2));
     return circleText;
   }
 
@@ -114,7 +113,7 @@ function makeResponsive() {
     var xLabel = selectXAxis;
 
     var yLabel = "";
-    if (selectYAxis === "healthcarelow") {
+    if (selectYAxis === "healthcareLow") {
       yLabel = "Health Care";
     }
     else {
@@ -195,8 +194,7 @@ function makeResponsive() {
         .enter()
         .append("text")
         .attr("x", d => xLinearScale(d[selectXAxis]))
-        .attr("y", d => yLinearScale(d[selectYAxis]))
-        // .attr("font-size", 10)
+        .attr("y", d => yLinearScale(d[selectYAxis] - 0.2))
         .text(d => d.abbr)
         .classed("stateText", true);
 
