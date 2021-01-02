@@ -9,8 +9,11 @@ function makeResponsive() {
    }
 
   // Svg parameters - using the window to make it responsive 
-  var svgHeight = window.innerHeight;
-  var svgWidth = window.innerWidth;
+  // var svgHeight = window.innerHeight;
+  // var svgWidth = window.innerWidth;
+
+  var svgHeight = 600;
+  var svgWidth = 1000;
 
   var margin = {
     top: 20,
@@ -35,6 +38,15 @@ function makeResponsive() {
   // Initial paramaters
   var selectXAxis = "poverty";
   var selectYAxis = "healthcareLow";
+
+  // Create initial header
+  var title1 = d3.select("#header1")
+  .append("text")
+  .text("Poverty");
+
+  var title2 = d3.select("#header2")
+  .append("text")
+  .text("healthcare");
   
   // ---------------- FUNCTION BARRAGE ---------------- //
   // Function for updating x-scale upon click on axis label
@@ -106,7 +118,6 @@ function makeResponsive() {
     return circleText;
   }
 
-
   // Function for updating circles group with new tooltip
   function updateToolTip(selectXAxis, selectYAxis, circlesGroup) {
 
@@ -114,7 +125,7 @@ function makeResponsive() {
 
     var yLabel = "";
     if (selectYAxis === "healthcareLow") {
-      yLabel = "Health Care";
+      yLabel = "Healthcare";
     }
     else {
       yLabel = selectYAxis;
@@ -124,7 +135,7 @@ function makeResponsive() {
     var toolTip = d3.tip()
       .attr("class", "d3-tip")
       .html(function(d) {
-        return (`<strong>${d.state}</strong><br>${xLabel}: ${d[selectXAxis]}<br>${yLabel}: ${d[selectYAxis]}%`);
+        return (`<strong>${d.state}</strong><br>${xLabel}: ${d[selectXAxis]}<br>${yLabel}: ${d[selectYAxis]}`);
       });
 
     circlesGroup.call(toolTip);
@@ -139,6 +150,31 @@ function makeResponsive() {
       });
 
   }
+
+    // Function for updating Chart title
+    function chartTitle(selectXAxis, selectYAxis) {
+      
+      title1.html("");
+      var xTitle = selectXAxis.toUpperCase();
+
+      title2.html("");
+      var yTtile = "";
+      if (selectYAxis === "healthcareLow") {
+        yTtile = "healthcare".toUpperCase();
+      }
+      else {
+        yTtile = selectYAxis.toUpperCase();
+      }
+
+      title1.append("text")
+      .text(xTitle);
+    
+      title2.append("text")
+      .text(yTtile);
+
+
+      return(title1, title2)
+    }
 
   // =================================================================================== //
 
@@ -199,7 +235,10 @@ function makeResponsive() {
         .classed("stateText", true);
 
       // Show the toolTip for the updated data points
-      updateToolTip(selectXAxis, selectYAxis, circlesGroup)
+      updateToolTip(selectXAxis, selectYAxis, circlesGroup);
+
+      // Update Chart title
+      chartTitle(selectXAxis, selectYAxis);
 
       // Create group for the three x-axis labels
       var xLabelsGroup = chartGroup.append("g")
@@ -287,6 +326,9 @@ function makeResponsive() {
             // Update tooltips with new info
             updateToolTip(selectXAxis, selectYAxis, circlesGroup);
 
+            // Update Chart title
+            chartTitle(selectXAxis, selectYAxis);
+
             // Changes classes to change bold text
             switch(selectXAxis) {
                 case "age":
@@ -348,6 +390,9 @@ function makeResponsive() {
 
             // Update tooltips with new info
             updateToolTip(selectXAxis, selectYAxis, circlesGroup);
+
+            // Update Chart title
+            chartTitle(selectXAxis, selectYAxis);
 
             // Change classes to change bold text
             switch(selectYAxis) {
