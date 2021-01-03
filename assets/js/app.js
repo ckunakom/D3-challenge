@@ -12,9 +12,13 @@ var trendDefault = d3.select("#trend")
 .append("text")
 .text("Lack of Healthcare & Poverty");
 
+var defaultTitle = trendDefault;
+
 var writeDefault = d3.select("#write")
 .append("text")
 .text("States with higher percentage of poverty seem to have higher percentage of population with lack of healthcare.");
+
+var defaultDes = writeDefault;
 
 // Create a function to resize the chart
 function makeResponsive() {
@@ -27,7 +31,7 @@ function makeResponsive() {
    }
 
   // Svg parameters - using the window to make it responsive 
-  var svgHeight = window.innerHeight;
+  var svgHeight = window.innerHeight - 150;
   var svgWidth = window.innerWidth;
 
   // Can't make up my mind on the layout - leaving this for now
@@ -92,7 +96,7 @@ function makeResponsive() {
     // Create scales
     var yLinearScale = d3.scaleLinear()
       .domain([d3.min(healthData, d => d[selectYAxis]) * 0.8,
-        d3.max(healthData, d => d[selectYAxis]) * 1.2
+        d3.max(healthData, d => d[selectYAxis]) * 1.05
       ])
       .range([height, 0]);
 
@@ -192,9 +196,61 @@ function makeResponsive() {
       title2.append("text")
       .text(yTtile);
 
-
       return(title1, title2)
     }
+
+    // Function for updating description
+    function description(selectXAxis, selectYAxis) {
+
+      trendDefault.html("");
+      var trendTitle = "";
+
+      writeDefault.html("");
+      var trendWrite = "";
+
+      if (selectXAxis == "age" && selectYAxis == "healthcareLow") {
+        trendTitle = "Lack of Healthcare & Age";
+        trendWrite = "States with higher median age may seem to have lower percentage of population with lack of healthcare.";
+      }
+
+      else if (selectXAxis == "income" && selectYAxis == "healthcareLow") {
+        trendTitle = "Lack of Healthcare & Median Household Income";
+        trendWrite = "States with higher household income seem to have lower percentage of population with lack of healthcare.";  
+      }
+
+      else if (selectXAxis == "income" && selectYAxis == "obesity") {
+        trendTitle = "Obesity & Median Household Income";
+        trendWrite = "States with higher percentage of obesity seem to have population with lower median household income.";
+      }
+
+      else if (selectXAxis == "age" && selectYAxis == "obesity") {
+        trendTitle = "Obesity & Age";
+        trendWrite = "States with median age of 36-38 years old tend to have higher percentage of obesity.";
+      }
+      
+      else if (selectXAxis == "poverty" && selectYAxis == "obesity") {
+        trendTitle = "Obesity & Poverty";
+        trendWrite = "States with higher percentage of poverty seem to have higher percentage of obesity.";
+      }
+
+
+
+
+
+
+
+
+      else {
+        trendTitle = "Lack of Healthcare & Poverty";
+        trendWrite = "States with higher percentage of poverty seem to have higher percentage of population with lack of healthcare.";
+      }
+      
+      trendDefault.append("text").text(trendTitle);
+      writeDefault.append("text").text(trendWrite);
+
+      return(trendTitle, trendWrite)
+    }
+
 
   // =================================================================================== //
   // Import data from data.csv
@@ -380,6 +436,9 @@ function makeResponsive() {
                     .classed("inactive", false);
                   break;
             }
+            
+            // Update Description
+            description(selectXAxis, selectYAxis);
           }
       });
 
@@ -445,6 +504,10 @@ function makeResponsive() {
                   .classed("inactive", false);
                 break;
             }
+
+            // Update Description
+            description(selectXAxis, selectYAxis);
+
           }
     });
 
