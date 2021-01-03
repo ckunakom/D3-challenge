@@ -1,3 +1,12 @@
+// Create initial header
+var title1 = d3.select("#header1")
+.append("text")
+.text("Poverty");
+
+var title2 = d3.select("#header2")
+.append("text")
+.text("healthcare");
+
 // Create a function to resize the chart
 function makeResponsive() {
 
@@ -9,11 +18,19 @@ function makeResponsive() {
    }
 
   // Svg parameters - using the window to make it responsive 
-  // var svgHeight = window.innerHeight;
-  // var svgWidth = window.innerWidth;
+  var svgHeight = window.innerHeight;
+  var svgWidth = window.innerWidth;
 
-  var svgHeight = 600;
-  var svgWidth = 1000;
+  // Can't make up my mind on the layout - leaving this for now
+  // var svgWidth = 0;
+  
+  // if (window.innerWidth > 1000) {
+  //   svgWidth = 1000  
+  // }
+
+  // else {
+  //   svgWidth = window.innerWidth;
+  // }
 
   var margin = {
     top: 20,
@@ -39,15 +56,6 @@ function makeResponsive() {
   var selectXAxis = "poverty";
   var selectYAxis = "healthcareLow";
 
-  // Create initial header
-  var title1 = d3.select("#header1")
-  .append("text")
-  .text("Poverty");
-
-  var title2 = d3.select("#header2")
-  .append("text")
-  .text("healthcare");
-  
   // ---------------- FUNCTION BARRAGE ---------------- //
   // Function for updating x-scale upon click on axis label
   function xScale(healthData, selectXAxis) {
@@ -155,15 +163,16 @@ function makeResponsive() {
     function chartTitle(selectXAxis, selectYAxis) {
       
       title1.html("");
-      var xTitle = selectXAxis.toUpperCase();
+      var xTitle = selectXAxis[0].toUpperCase() + selectXAxis.substr(1);
 
       title2.html("");
       var yTtile = "";
       if (selectYAxis === "healthcareLow") {
-        yTtile = "healthcare".toUpperCase();
+        yTtile = "healthcare"[0].toUpperCase() + "healthcare".substr(1);
+        ;
       }
       else {
-        yTtile = selectYAxis.toUpperCase();
+        yTtile = selectYAxis[0].toUpperCase() + selectYAxis.substr(1);
       }
 
       title1.append("text")

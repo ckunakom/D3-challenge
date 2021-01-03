@@ -13,43 +13,37 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Correlations Between Health Risks and Demographics</a>
+    <a class="navbar-brand" href="https://github.com/ckunakom/healthrisks_demographic"><h2>Correlations Between Health Risks and Demographics</h2></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   </nav>
 
-  <div class="container">
-    <div class="row">
+    <!-- <div class="row"> -->
       <div class="col mt-3">
         <h5><a id="header1"></a> VS <a id="header2"></a></h5>
       </div>
-    </div>
+    <!-- </div> -->
     <div class="row">
-      <div class="col">
+      <div class="col-8 mb-3">
         <!--CHART-->
         <div id="scatter"></div>
       </div>
-    </div>
-    <div class="row mt-3">
-      <div class="col">
-        <div>
-          <h2>Correlations Discovered Between Health Risks and Age, Income</h2>
-          <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
-            quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
-            ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-
-          <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
-            quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
-            ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-
-          <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
-            quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
-            ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+      <div class="col-xl-4">
+        <div id="script">
+          <h4>Correlations Discovered Between Health Risks and Age, Income</h4>
+          <p>
+            IDEAS:
+            Add more ids here to analyze each pair. Eg. Healthcare VS Poverty, Healthcare VS Age, etc<br>
+            See if I can get the pair as I click through the chart.
+            Maybe do, if select X &  select Y is this then that.
+            And from nahiyan:
+            myString[0].toUpperCase() + myString.substr(1)
+          </p>
         </div>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

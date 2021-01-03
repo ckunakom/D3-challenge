@@ -28,6 +28,7 @@
   font-family: sans-serif;
   fill: #fff;
   text-anchor: middle;
+  font-size: 14px;
 }
 
 .stateCircle {
@@ -53,18 +54,12 @@
 }
 
 /* Mobile Rules */
-@media screen and (max-width: 530px) {
-  .stateText {
-    display: none;
-  }
-
+@media screen and (max-width: 1200px) {
   .aText {
     font-size: 14px;
   }
-}
 
-@media screen and (max-width: 400px) {
-  .aText {
-    font-size: 13px;
+  #script {
+    padding: 0 16px;
   }
 }
