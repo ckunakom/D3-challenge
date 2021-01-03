@@ -6,7 +6,6 @@
   <title>D3Times</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/bootstrap.css">
-  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/d3Style.css">
 
 </head>
@@ -19,31 +18,30 @@
     </button>
   </nav>
 
-    <!-- <div class="row"> -->
-      <div class="col mt-3">
-        <h5><a id="header1"></a> VS <a id="header2"></a></h5>
-      </div>
-    <!-- </div> -->
+  <div class="container">
     <div class="row">
-      <div class="col-8 mb-3">
-        <!--CHART-->
-        <div id="scatter"></div>
-      </div>
-      <div class="col-xl-4">
-        <div id="script">
-          <h4>Correlations Discovered Between Health Risks and Age, Income</h4>
-          <p>
-            IDEAS:
-            Add more ids here to analyze each pair. Eg. Healthcare VS Poverty, Healthcare VS Age, etc<br>
-            See if I can get the pair as I click through the chart.
-            Maybe do, if select X &  select Y is this then that.
-            And from nahiyan:
-            myString[0].toUpperCase() + myString.substr(1)
-          </p>
-        </div>
+      <div class="col mt-3">
+        <h5 class="text-center"><a id="header1"></a> VS <a id="header2"></a></h5>
       </div>
     </div>
-  <!-- </div> -->
+  </div>
+
+  <div class="row">
+    <div class="col-12 mb-3">
+      <!--CHART-->
+      <div id="scatter"></div>
+    </div>
+  </div>
+  
+    <div class="col-xl-12 ml-5 pl-5">
+      <div id="script">
+        <!-- Trend title -->
+        <h5><a id="trend" class="text-primary"></a></h5>
+        <!-- Little write up -->
+        <p id="write"></p>
+      </div>
+    </div>
+
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

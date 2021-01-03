@@ -7,6 +7,15 @@ var title2 = d3.select("#header2")
 .append("text")
 .text("healthcare");
 
+// Create intial writeup
+var trendDefault = d3.select("#trend")
+.append("text")
+.text("Lack of Healthcare & Poverty");
+
+var writeDefault = d3.select("#write")
+.append("text")
+.text("States with higher percentage of poverty seem to have higher percentage of population with lack of healthcare.");
+
 // Create a function to resize the chart
 function makeResponsive() {
 
@@ -36,7 +45,7 @@ function makeResponsive() {
     top: 20,
     right: 40,
     bottom: 80,
-    left: 100
+    left: 120
   };
 
   var width = svgWidth - margin.left - margin.right;
@@ -143,6 +152,7 @@ function makeResponsive() {
     var toolTip = d3.tip()
       .attr("class", "d3-tip")
       .html(function(d) {
+        // console.log(d.state);
         return (`<strong>${d.state}</strong><br>${xLabel}: ${d[selectXAxis]}<br>${yLabel}: ${d[selectYAxis]}`);
       });
 
@@ -167,6 +177,7 @@ function makeResponsive() {
 
       title2.html("");
       var yTtile = "";
+
       if (selectYAxis === "healthcareLow") {
         yTtile = "healthcare"[0].toUpperCase() + "healthcare".substr(1);
         ;
@@ -186,7 +197,6 @@ function makeResponsive() {
     }
 
   // =================================================================================== //
-
   // Import data from data.csv
   d3.csv("assets/data/data.csv").then(function(healthData) {
 
@@ -285,7 +295,7 @@ function makeResponsive() {
 
       // Lack of Healthcare 
       var lackHealthLabel = yLabelsGroup.append("text")
-        .attr("y", 0 - margin.left + 60)
+        .attr("y", 0 - margin.left + 80)
         .attr("x", 0 - (height / 2))
         .attr("value", "healthcareLow")
         .attr("class", "active")
@@ -294,7 +304,7 @@ function makeResponsive() {
 
       // Obseity
       var obseseLabel = yLabelsGroup.append("text")
-        .attr("y", 0 - margin.left + 40)
+        .attr("y", 0 - margin.left + 60)
         .attr("x", 0 - (height / 2))
         .attr("value", "obesity")
         .attr("class", "inactive")
@@ -302,7 +312,7 @@ function makeResponsive() {
 
       // Smoke
       var smokeLabel = yLabelsGroup.append("text")
-        .attr("y", 0 - margin.left + 20)
+        .attr("y", 0 - margin.left + 40)
         .attr("x", 0 - (height / 2))
         .attr("value", "smokes")
         .attr("class", "inactive")
