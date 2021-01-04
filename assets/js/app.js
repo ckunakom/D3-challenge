@@ -233,12 +233,20 @@ function makeResponsive() {
         trendWrite = "States with higher percentage of poverty seem to have higher percentage of obesity.";
       }
 
+      else if (selectXAxis == "poverty" && selectYAxis == "smokes") {
+        trendTitle = "Smoking & Poverty";
+        trendWrite = "States with higher percentage of smoker may seem to have higher percentage of obesity.";
+      }
 
+      else if (selectXAxis == "age" && selectYAxis == "smokes") {
+        trendTitle = "Smoking & Age";
+        trendWrite = "States with over 20% of the popuation that are smokers seem to have the median age of 36-40.";
+      }
 
-
-
-
-
+      else if (selectXAxis == "income" && selectYAxis == "smokes") {
+        trendTitle = "Smoking & Median Household Income";
+        trendWrite = "States with over 20% of the popuation that are smokers seem to have a lower median household income.";
+      }
 
       else {
         trendTitle = "Lack of Healthcare & Poverty";
